@@ -22,12 +22,12 @@ public class SemanaActivity extends AppCompatActivity {
     }
 
     public void verDiaSemana(View view) {
-        Resources res = getResources();
-        String diaSemanaString = res.getResourceEntryName(view.getId());
+        final Resources res = getResources();
+        final String diaSemanaString = res.getResourceEntryName(view.getId());
         int diaSemana = -1;
         int diasDesdeDomingo = 0;
         boolean esDomingo = false;
-        switch(diaSemanaString){
+        switch (diaSemanaString) {
             case "Lunes":
                 diaSemana = Calendar.MONDAY;
                 diasDesdeDomingo = -6;
@@ -57,11 +57,14 @@ public class SemanaActivity extends AppCompatActivity {
                 diasDesdeDomingo = 1;
                 esDomingo = true;
                 break;
+            default:
+                diasDesdeDomingo = -7;
+                break;
         }
 
-        if(fecha.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+        if (fecha.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
             fecha.set(Calendar.DAY_OF_WEEK, diaSemana);
-            if(esDomingo){
+            if (esDomingo) {
                 fecha.add(Calendar.DAY_OF_YEAR, diasDesdeDomingo);
             }
         } else {
